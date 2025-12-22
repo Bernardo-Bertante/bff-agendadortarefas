@@ -36,7 +36,7 @@ public class UsuarioController {
             @RequestBody UsuarioDTO usuarioDTO,
             @RequestHeader("Authorization") String token) {
 
-        return ResponseEntity.ok(usuarioService.salvarUsuario(usuarioDTO));
+        return ResponseEntity.ok(usuarioService.salvarUsuario(usuarioDTO, token));
     }
 
     @PostMapping("/login")
@@ -50,8 +50,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
     public String login(
-            @RequestBody UsuarioDTO usuarioDTO,
-            @RequestHeader("Authorization") String token) {
+            @RequestBody UsuarioDTO usuarioDTO) {
 
         return usuarioService.login(usuarioDTO);
     }
@@ -70,7 +69,7 @@ public class UsuarioController {
             @RequestParam("email") String email,
             @RequestHeader("Authorization") String token) {
 
-        return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
+        return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email, token));
     }
 
     @DeleteMapping("/{email}")
@@ -87,7 +86,7 @@ public class UsuarioController {
             @PathVariable String email,
             @RequestHeader("Authorization") String token) {
 
-        usuarioService.deletarUsuarioPorEmail(email);
+        usuarioService.deletarUsuarioPorEmail(email, token);
         return ResponseEntity.ok().build();
     }
 
@@ -123,7 +122,7 @@ public class UsuarioController {
             @RequestParam("id") Long id,
             @RequestHeader("Authorization") String token) {
 
-        return ResponseEntity.ok(usuarioService.atualizarEndereco(id, enderecoDTO));
+        return ResponseEntity.ok(usuarioService.atualizarEndereco(id, enderecoDTO, token));
     }
 
     @PutMapping("/telefone")
@@ -141,7 +140,7 @@ public class UsuarioController {
             @RequestParam("id") Long id,
             @RequestHeader("Authorization") String token) {
 
-        return ResponseEntity.ok(usuarioService.atualizarTelefone(id, telefoneDTO));
+        return ResponseEntity.ok(usuarioService.atualizarTelefone(id, telefoneDTO, token));
     }
 
     @PostMapping("/endereco")

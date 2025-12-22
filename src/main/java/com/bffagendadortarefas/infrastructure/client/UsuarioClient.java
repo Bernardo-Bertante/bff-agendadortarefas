@@ -11,16 +11,19 @@ import org.springframework.web.bind.annotation.*;
 public interface UsuarioClient {
 
     @GetMapping
-    UsuarioDTO buscarUsuarioPorEmail(@RequestParam("email") String email);
+    UsuarioDTO buscarUsuarioPorEmail(@RequestParam("email") String email,
+                                     @RequestHeader("Authorization") String token);
 
     @PostMapping
-    UsuarioDTO salvarUsuario(@RequestBody UsuarioDTO usuarioDTO);
+    UsuarioDTO salvarUsuario(@RequestBody UsuarioDTO usuarioDTO,
+                             @RequestHeader("Authorization") String token);
 
     @PostMapping("/login")
     String login(@RequestBody UsuarioDTO usuarioDTO);
 
     @DeleteMapping("/{email}")
-    void deletarUsuarioPorEmail(@PathVariable String email);
+    void deletarUsuarioPorEmail(@PathVariable String email,
+                                @RequestHeader("Authorization") String token);
 
     @PutMapping
     UsuarioDTO atualizarDadosUsuario(@RequestBody UsuarioDTO usuarioDTO,
@@ -28,11 +31,13 @@ public interface UsuarioClient {
 
     @PutMapping("/endereco")
     EnderecoDTO atualizarEndereco(@RequestBody EnderecoDTO enderecoDTO,
-                                  @RequestParam("id") Long id);
+                                  @RequestParam("id") Long id,
+                                  @RequestHeader("Authorization") String token);
 
     @PutMapping("/telefone")
     TelefoneDTO atualizarTelefone(@RequestBody TelefoneDTO telefoneDTO,
-                                  @RequestParam("id") Long id);
+                                  @RequestParam("id") Long id,
+                                  @RequestHeader("Authorization") String token);
 
     @PostMapping("/endereco")
     EnderecoDTO cadastrarEndereco(@RequestBody EnderecoDTO enderecoDTO,
