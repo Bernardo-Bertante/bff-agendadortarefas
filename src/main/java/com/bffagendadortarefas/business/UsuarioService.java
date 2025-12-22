@@ -14,32 +14,32 @@ public class UsuarioService {
 
     private final UsuarioClient client;
 
-    public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO) {
-        return client.salvarUsuario(usuarioDTO);
+    public UsuarioDTO salvarUsuario(UsuarioDTO usuarioDTO, String token) {
+        return client.salvarUsuario(usuarioDTO, token);
     }
 
-    public void deletarUsuarioPorEmail(String email) {
-        client.deletarUsuarioPorEmail(email);
+    public void deletarUsuarioPorEmail(String email, String token) {
+        client.deletarUsuarioPorEmail(email, token);
     }
 
     public UsuarioDTO atualizarDadosUsuario(String token, UsuarioDTO usuarioDTO) {
         return client.atualizarDadosUsuario(usuarioDTO, token);
     }
 
-    public UsuarioDTO buscarUsuarioPorEmail(String email) {
-        return client.buscarUsuarioPorEmail(email);
+    public UsuarioDTO buscarUsuarioPorEmail(String email, String token) {
+        return client.buscarUsuarioPorEmail(email, token);
     }
 
     public String login(UsuarioDTO usuarioDTO) {
         return client.login(usuarioDTO);
     }
 
-    public EnderecoDTO atualizarEndereco(Long idEndereco, EnderecoDTO enderecoDTO) {
-        return client.atualizarEndereco(enderecoDTO, idEndereco);
+    public EnderecoDTO atualizarEndereco(Long idEndereco, EnderecoDTO enderecoDTO, String token) {
+        return client.atualizarEndereco(enderecoDTO, idEndereco, token);
     }
 
-    public TelefoneDTO atualizarTelefone(Long idTelefone, TelefoneDTO telefoneDTO) {
-        return client.atualizarTelefone(telefoneDTO, idTelefone);
+    public TelefoneDTO atualizarTelefone(Long idTelefone, TelefoneDTO telefoneDTO, String token) {
+        return client.atualizarTelefone(telefoneDTO, idTelefone, token);
     }
 
     public EnderecoDTO cadastrarEndereco(String token, EnderecoDTO enderecoDTO) {
