@@ -1,12 +1,15 @@
 package com.bffagendadortarefas.controller;
 
 import com.bffagendadortarefas.business.TarefasService;
-import com.bffagendadortarefas.dto.TarefasDTO;
+import com.bffagendadortarefas.dto.in.TarefasDTORequest;
+import com.bffagendadortarefas.dto.out.TarefasDTOResponse;
 import com.bffagendadortarefas.infrastructure.enums.StatusNotificacaoEnum;
+import com.bffagendadortarefas.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +23,7 @@ import java.util.List;
 @RequestMapping("/tarefas")
 @AllArgsConstructor
 @Tag(name = "Tarefas", description = "Gerenciamento de tarefas do usuário")
+@SecurityRequirement(name = SecurityConfig.SECURITY_SCHEME)
 public class TarefasController {
 
     private final TarefasService tarefasService;
@@ -34,16 +38,16 @@ public class TarefasController {
             @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
     @PostMapping
-    public ResponseEntity<TarefasDTO> criarTarefa(
+    public ResponseEntity<TarefasDTOResponse> criarTarefa(
             @RequestBody
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Dados da tarefa",
                     required = true
             )
-            TarefasDTO tarefasDTO,
+            TarefasDTORequest tarefasDTO,
 
-            @RequestHeader("Authorization")
-            @Parameter(description = "Token JWT no formato Bearer {token}", required = true)
+            @RequestHeader(name = "Authorization", required = false)
+            @Parameter(description = "Token JWT no formato Bearer {token}")
             String token
     ) {
         return ResponseEntity.ok(tarefasService.criarTarefa(tarefasDTO, token));
@@ -58,7 +62,7 @@ public class TarefasController {
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
     @GetMapping("/eventos")
-    public ResponseEntity<List<TarefasDTO>> buscarTarefasPorPeriodo(
+    public ResponseEntity<List<TarefasDTOResponse>> buscarTarefasPorPeriodo(
 
             @Parameter(description = "Data inicial no formato ISO-8601", example = "2025-01-01T00:00:00")
             @RequestParam
@@ -70,8 +74,8 @@ public class TarefasController {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
             LocalDateTime dataFim,
 
-            @RequestHeader("Authorization")
-            @Parameter(description = "Token JWT", required = true)
+            @RequestHeader(name = "Authorization", required = false)
+            @Parameter(description = "Token JWT")
             String token
     ) {
         return ResponseEntity.ok(
@@ -88,10 +92,10 @@ public class TarefasController {
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
     @GetMapping
-    public ResponseEntity<List<TarefasDTO>> buscarTarefasPorEmail(
+    public ResponseEntity<List<TarefasDTOResponse>> buscarTarefasPorEmail(
 
-            @RequestHeader("Authorization")
-            @Parameter(description = "Token JWT", required = true)
+            @RequestHeader(name = "Authorization", required = false)
+            @Parameter(description = "Token JWT")
             String token
     ) {
         return ResponseEntity.ok(tarefasService.buscarTarefasPorEmail(token));
@@ -113,8 +117,8 @@ public class TarefasController {
             @RequestParam("id")
             String id,
 
-            @RequestHeader("Authorization")
-            @Parameter(description = "Token JWT", required = true)
+            @RequestHeader(name = "Authorization", required = false)
+            @Parameter(description = "Token JWT")
             String token
     ) {
         tarefasService.deletarTarefaPorId(id, token);
@@ -131,7 +135,7 @@ public class TarefasController {
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
     @PatchMapping
-    public ResponseEntity<TarefasDTO> alterarStatusTarefa(
+    public ResponseEntity<TarefasDTOResponse> alterarStatusTarefa(
 
             @Parameter(description = "ID da tarefa", required = true)
             @RequestParam("id")
@@ -145,8 +149,8 @@ public class TarefasController {
             @RequestParam("status")
             StatusNotificacaoEnum status,
 
-            @RequestHeader("Authorization")
-            @Parameter(description = "Token JWT", required = true)
+            @RequestHeader(name = "Authorization", required = false)
+            @Parameter(description = "Token JWT")
             String token
     ) {
         return ResponseEntity.ok(
@@ -164,7 +168,7 @@ public class TarefasController {
             @ApiResponse(responseCode = "404", description = "Tarefa não encontrada")
     })
     @PutMapping
-    public ResponseEntity<TarefasDTO> alterarTarefa(
+    public ResponseEntity<TarefasDTOResponse> alterarTarefa(
 
             @Parameter(description = "ID da tarefa", required = true)
             @RequestParam("id")
@@ -175,10 +179,10 @@ public class TarefasController {
                     description = "Novos dados da tarefa",
                     required = true
             )
-            TarefasDTO tarefasDTO,
+            TarefasDTORequest tarefasDTO,
 
-            @RequestHeader("Authorization")
-            @Parameter(description = "Token JWT", required = true)
+            @RequestHeader(name = "Authorization", required = false)
+            @Parameter(description = "Token JWT")
             String token
     ) {
         return ResponseEntity.ok(

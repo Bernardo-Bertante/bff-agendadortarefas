@@ -1,4 +1,4 @@
-package com.bffagendadortarefas.dto;
+package com.bffagendadortarefas.dto.out;
 
 
 import com.bffagendadortarefas.infrastructure.enums.StatusNotificacaoEnum;
@@ -10,13 +10,12 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class TarefasDTO {
+public class TarefasDTOResponse {
 
     private String id;
     private String nomeTarefa;
     private String descricao;
     private LocalDateTime dataCriacao;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime dataEvento;
     private String emailUsuario;
     private LocalDateTime dataAlteracao;
