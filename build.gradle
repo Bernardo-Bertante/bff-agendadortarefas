@@ -25,6 +25,9 @@ ext {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+	//Jackson
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
 	// OpenFeign
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
