@@ -33,8 +33,8 @@ public class UsuarioController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Usuário cadastrado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos"),
-            @ApiResponse(responseCode = "409", description = "Email já cadastrado"),
-            @ApiResponse(responseCode = "401", description = "Não autorizado")
+            @ApiResponse(responseCode = "401", description = "Não autorizado"),
+            @ApiResponse(responseCode = "409", description = "Email já cadastrado")
     })
     public ResponseEntity<UsuarioDTOResponse> salvarUsuario(
             @RequestBody UsuarioDTORequest usuarioDTO,
@@ -66,8 +66,9 @@ public class UsuarioController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Usuário encontrado"),
-            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
-            @ApiResponse(responseCode = "401", description = "Não autorizado")
+            @ApiResponse(responseCode = "403", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "401", description = "Não autorizado"),
+            @ApiResponse(responseCode = "500", description = "Erro de servidor")
     })
     public ResponseEntity<UsuarioDTOResponse> buscarUsuarioPorEmail(
             @RequestParam("email") String email,
@@ -83,7 +84,7 @@ public class UsuarioController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Usuário removido com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Usuário não encontrado"),
+            @ApiResponse(responseCode = "403", description = "Usuário não encontrado"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
     public ResponseEntity<Void> deletarUsuarioPorEmail(
@@ -102,7 +103,8 @@ public class UsuarioController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Dados atualizados com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos"),
-            @ApiResponse(responseCode = "401", description = "Não autorizado")
+            @ApiResponse(responseCode = "401", description = "Não autorizado"),
+            @ApiResponse(responseCode = "403", description = "Usuário não encontrado"),
     })
     public ResponseEntity<UsuarioDTOResponse> atualizarDadosUsuario(
             @RequestBody UsuarioDTORequest usuarioDTO,
@@ -118,7 +120,7 @@ public class UsuarioController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Endereço atualizado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Endereço não encontrado"),
+            @ApiResponse(responseCode = "403", description = "Endereço não encontrado"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
     public ResponseEntity<EnderecoDTOResponse> atualizarEndereco(
@@ -136,7 +138,7 @@ public class UsuarioController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Telefone atualizado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Telefone não encontrado"),
+            @ApiResponse(responseCode = "403", description = "Telefone não encontrado"),
             @ApiResponse(responseCode = "401", description = "Não autorizado")
     })
     public ResponseEntity<TelefoneDTOResponse> atualizarTelefone(
@@ -155,7 +157,8 @@ public class UsuarioController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Endereço cadastrado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos"),
-            @ApiResponse(responseCode = "401", description = "Não autorizado")
+            @ApiResponse(responseCode = "401", description = "Não autorizado"),
+            @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
     })
     public ResponseEntity<EnderecoDTOResponse> cadastrarEndereco(
             @RequestBody EnderecoDTORequest enderecoDTO,
@@ -172,7 +175,8 @@ public class UsuarioController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Telefone cadastrado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos"),
-            @ApiResponse(responseCode = "401", description = "Não autorizado")
+            @ApiResponse(responseCode = "401", description = "Não autorizado"),
+            @ApiResponse(responseCode = "403", description = "Usuário não encontrado")
     })
     public ResponseEntity<TelefoneDTOResponse> cadastrarTelefone(
             @RequestBody TelefoneDTORequest telefoneDTO,

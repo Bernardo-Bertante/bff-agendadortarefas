@@ -89,7 +89,8 @@ public class TarefasController {
     )
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Lista de tarefas retornada"),
-            @ApiResponse(responseCode = "401", description = "Não autorizado")
+            @ApiResponse(responseCode = "401", description = "Não autorizado"),
+            @ApiResponse(responseCode = "403", description = "Email não encontrado")
     })
     @GetMapping
     public ResponseEntity<List<TarefasDTOResponse>> buscarTarefasPorEmail(
@@ -108,6 +109,7 @@ public class TarefasController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Tarefa removida"),
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
+            @ApiResponse(responseCode = "403", description = "Tarefa id não encontrada"),
             @ApiResponse(responseCode = "404", description = "Tarefa não encontrada")
     })
     @DeleteMapping
@@ -132,7 +134,8 @@ public class TarefasController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Status atualizado"),
             @ApiResponse(responseCode = "400", description = "Status inválido"),
-            @ApiResponse(responseCode = "401", description = "Não autorizado")
+            @ApiResponse(responseCode = "401", description = "Não autorizado"),
+            @ApiResponse(responseCode = "403", description = "Tarefa id não encontrada")
     })
     @PatchMapping
     public ResponseEntity<TarefasDTOResponse> alterarStatusTarefa(
@@ -165,7 +168,8 @@ public class TarefasController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Tarefa atualizada"),
             @ApiResponse(responseCode = "401", description = "Não autorizado"),
-            @ApiResponse(responseCode = "404", description = "Tarefa não encontrada")
+            @ApiResponse(responseCode = "404", description = "Tarefa não encontrada"),
+            @ApiResponse(responseCode = "403", description = "Tarefa id não encontrada")
     })
     @PutMapping
     public ResponseEntity<TarefasDTOResponse> alterarTarefa(
