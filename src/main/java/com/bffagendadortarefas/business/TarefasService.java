@@ -1,7 +1,8 @@
 package com.bffagendadortarefas.business;
 
 
-import com.bffagendadortarefas.dto.TarefasDTO;
+import com.bffagendadortarefas.dto.in.TarefasDTORequest;
+import com.bffagendadortarefas.dto.out.TarefasDTOResponse;
 import com.bffagendadortarefas.infrastructure.client.TarefasClient;
 import com.bffagendadortarefas.infrastructure.enums.StatusNotificacaoEnum;
 import lombok.AllArgsConstructor;
@@ -16,16 +17,16 @@ public class TarefasService {
 
     private final TarefasClient tarefasClient;
 
-    public TarefasDTO criarTarefa(TarefasDTO dto, String token) {
+    public TarefasDTOResponse criarTarefa(TarefasDTORequest dto, String token) {
         return tarefasClient.criarTarefa(dto, token);
 
     }
 
-    public List<TarefasDTO> buscarTarefasPorPeriodo(LocalDateTime dataInicio, LocalDateTime dataFim, String token) {
+    public List<TarefasDTOResponse> buscarTarefasPorPeriodo(LocalDateTime dataInicio, LocalDateTime dataFim, String token) {
         return tarefasClient.buscarTarefasPorPeriodo(dataInicio, dataFim, token);
     }
 
-    public List<TarefasDTO> buscarTarefasPorEmail(String token) {
+    public List<TarefasDTOResponse> buscarTarefasPorEmail(String token) {
         return tarefasClient.buscarTarefasPorEmail(token);
     }
 
@@ -33,11 +34,11 @@ public class TarefasService {
         tarefasClient.deletarTarefaPorId(id, token);
     }
 
-    public TarefasDTO alterarStatusTarefa(String id, StatusNotificacaoEnum status, String token) {
+    public TarefasDTOResponse alterarStatusTarefa(String id, StatusNotificacaoEnum status, String token) {
         return tarefasClient.alterarStatusTarefa(id, status, token);
     }
 
-    public TarefasDTO alterarTarefa(String id, TarefasDTO dto, String token) {
+    public TarefasDTOResponse alterarTarefa(String id, TarefasDTORequest dto, String token) {
         return tarefasClient.alterarTarefa(id, dto, token);
     }
 }

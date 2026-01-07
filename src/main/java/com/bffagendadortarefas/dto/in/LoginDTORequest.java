@@ -1,4 +1,4 @@
-package com.bffagendadortarefas.dto;
+package com.bffagendadortarefas.dto.in;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TelefoneDTO {
+public class LoginDTORequest {
 
-    private Long id;
-    private String numero;
-    private String ddd;
+    private String email;
+    private String senha;
+
 }

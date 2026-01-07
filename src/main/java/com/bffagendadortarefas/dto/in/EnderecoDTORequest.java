@@ -1,4 +1,4 @@
-package com.bffagendadortarefas.dto;
+package com.bffagendadortarefas.dto.in;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EnderecoDTO {
+public class EnderecoDTORequest {
 
-    private Long id;
     private String rua;
     private Long numero;
     private String complemento;
